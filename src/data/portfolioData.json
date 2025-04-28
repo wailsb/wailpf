@@ -1,0 +1,64 @@
+{
+  "personalInfo": {
+    "name": "Ouweis wail sari bey",
+    "title": "Full-Stack Developer",
+    "description": "Passionate developer creating innovative solutions for web, desktop, and mobile platforms."
+  },
+  "skills": [
+    "Full-Stack Developer",
+    "Desktop App Dev",
+    "Mobile App Dev"
+  ],
+  "services": [
+    {
+      "title": "Full-Stack Developer",
+      "description": "As Bill Gates said, 'If your business is not on the Internet, then your business will be out of business.' Whether you're a business owner, company leader, or content creator, having an online presence in 2024 isn't just optional—it's essential. That's where I step in! I specialize in creating functional, modern websites tailored to your needs. With sleek designs and smooth user experiences, I'll help you make a lasting impact online. Let's bring your vision to life—starting today!"
+    },
+    {
+      "title": "Desktop Apps",
+      "description": "Desktop apps serve as dynamic solutions to a variety of challenges, such as inefficient inventory management, managing customer relationships, and more. This is where I come in; I help businesses and companies overcome these issues by developing smooth, tailored software solutions. My apps prioritize innovative architecture design, seamless maintenance, and modernized functionalities to ensure optimal performance and adaptability."
+    },
+    {
+      "title": "Android App Development",
+      "description": "Whether you want to create a brand new app, hoping to give your app an upgrade, or seeking expand your app reach by adapting it for other android devices, I can help you to bring your idea's to light."
+    }
+  ],
+  "portfolio": [
+    {
+      "id": 1,
+      "title": "E-commerce Platform",
+      "description": "A full-featured online store with payment integration and inventory management.",
+      "technologies": ["React", "Node.js", "MongoDB"],
+      "image": "portfolio1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Inventory Management System",
+      "description": "Desktop application for efficient inventory tracking and management.",
+      "technologies": ["C#", ".NET", "SQL Server"],
+      "image": "portfolio2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Fitness Tracking App",
+      "description": "Mobile app to track workouts, nutrition, and health metrics.",
+      "technologies": ["React", "SQL", "Electron"],
+      "image": "portfolio3.jpg"
+    }
+  ],
+  "about": {
+    "bio": "I'm a passionate full-stack developer with experience in web, desktop, and mobile application development. With a strong focus on user experience and clean code, I deliver solutions that not only meet client requirements but exceed expectations.",
+    "experience": "5+ years",
+    "education": "Computer Science Engineer at USTHB",
+    "languages": ["HTML", "CSS", "JavaScript", "TypeScript", "C#", "Java", "Python", "SQL"]
+  },
+  "contact": {
+    "email": "wail.saribey@gmail.com",
+    "phone": "+1234567890",
+    "location": "Algeirs , Algeria"
+  },
+  "social": {
+    "github": "https://github.com/wailsb",
+    "linkedin": "https://linkedin.com/in/wailsb"
+  }
+}
