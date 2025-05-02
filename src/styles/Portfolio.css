@@ -135,6 +135,17 @@
   line-height: 1.7;
 }
 
+.project-modal-image {
+  max-width: 300px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 1rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .modal-tech-tags {
   display: flex;
   flex-wrap: wrap;
@@ -169,5 +180,10 @@
   
   .project-actions {
     flex-direction: column;
+  }
+  
+  .project-modal-image {
+    max-width: 250px;
+    max-height: 300px;
   }
 }

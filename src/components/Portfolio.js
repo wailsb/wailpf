@@ -93,6 +93,14 @@ const Portfolio = ({ projects }) => {
             >
               <button className="close-modal" onClick={closeProject}>×</button>
               <h2>{selectedProject.title}</h2>
+              <motion.img
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="project-modal-image"
+              />
               <p>{selectedProject.description}</p>
               <div className="modal-tech-tags">
                 {selectedProject.technologies.map((tech, index) => (
@@ -100,8 +108,8 @@ const Portfolio = ({ projects }) => {
                 ))}
               </div>
               <div className="project-actions">
-                <button className="project-button" onClick={() => window.open("https://www.github.com/wailsb", '_blank')}>Live Demo</button>
-                <button className="project-button" onClick={() => window.open("https://www.github.com/wailsb", '_blank')}>Source Code</button>
+                <button className="project-button" onClick={() => window.open(selectedProject.link, '_blank')}>Live Demo</button>
+                <button className="project-button" onClick={() => window.open("https://www.github.com/wailsb", '_blank')}>Source Code (look at the github repo)</button>
               </div>
             </motion.div>
           </motion.div>

@@ -26,31 +26,34 @@
   "portfolio": [
     {
       "id": 1,
-      "title": "E-commerce Platform",
-      "description": "A full-featured online store with payment integration and inventory management.",
-      "technologies": ["React", "Node.js", "MongoDB"],
-      "image": "portfolio1.jpg"
+      "title": "Web Portfolio for Skybit Agency",
+      "description": "A web portfolio for Skybit Agency with a modern and responsive design for both desktop and mobile devices.",
+      "technologies": ["React", "Node.js", "MERN Stack","Tailwind CSS","Vite","Git"],
+      "image": "skybit.png",
+      "link": "https://chahine-bz.vercel.app"
     },
     {
       "id": 2,
       "title": "Inventory Management System",
-      "description": "Desktop application for efficient inventory tracking and management.",
-      "technologies": ["C#", ".NET", "SQL Server"],
-      "image": "portfolio2.jpg"
+      "description": "Web application for efficient inventory tracking and management.",
+      "technologies": ["React", "Node.js", "PostgreSQL"],
+      "image": "stmg.png",
+      "link": "https://front-mg-phdi.vercel.app/"
     },
     {
       "id": 3,
-      "title": "Fitness Tracking App",
-      "description": "Mobile app to track workouts, nutrition, and health metrics.",
-      "technologies": ["React", "SQL", "Electron"],
-      "image": "portfolio3.jpg"
+      "title": "Mobile App for phone store",
+      "description": "Mobile app to track worker's performance and manage inventory.",
+      "technologies": ["Kotlin", "PostgreSQL", "Android","Git"],
+      "image": "acs.png",
+      "link": "https://wail-saribey.vercel.app/"
     }
   ],
   "about": {
     "bio": "I'm a passionate full-stack developer with experience in web, desktop, and mobile application development. With a strong focus on user experience and clean code, I deliver solutions that not only meet client requirements but exceed expectations.",
     "experience": "5+ years",
     "education": "Computer Science Engineer at USTHB",
-    "languages": ["HTML", "CSS", "JavaScript", "TypeScript", "C#", "Java", "Python", "SQL"]
+    "languages": ["HTML", "CSS", "JavaScript", "TypeScript", "C#", "Java", "Python", "SQL","Kotlin","Git","Android","React","Node.js","MERN Stack","Tailwind CSS","Framer Motion","Vite","PostgreSQL","Electron"]
   },
   "contact": {
     "email": "wail.saribey@gmail.com",
