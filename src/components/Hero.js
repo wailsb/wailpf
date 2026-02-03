@@ -97,11 +97,6 @@ const Hero = ({ data, skills }) => {
         <div className="mouse">
           <div className="wheel"></div>
         </div>
-        <div>
-          <span className="scroll-arrows">
-            ↓
-          </span>
-        </div>
       </motion.div>
     </motion.section>
   );
