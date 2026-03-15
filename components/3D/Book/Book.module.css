@@ -2,7 +2,7 @@
 	--book-rx: 0deg;
 	--book-ry: 0deg;
 	--book-rz: 0deg;
-	--book-open-angle: -60deg;
+	--book-open-angle: 0deg;
 	--inside-right-angle: var(--book-open-angle);
 
 	--book-width: 250px;
@@ -66,7 +66,7 @@
 	display: grid;
 	place-items: center;
 	transform: translateZ(var(--z-fix));
-	backface-visibility: visible;
+	backface-visibility: hidden;
 }
 
 .title {
@@ -159,8 +159,9 @@
 
 @media (max-width: 640px) {
 	.scene {
-		--book-width: 240px;
-		--book-height: 170px;
+        
+	    --book-width: 200px;
+	    --book-height: 250px;
 		--book-thickness: 16px;
 		width: 360px;
 		height: 300px;
