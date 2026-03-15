@@ -151,7 +151,7 @@ export default function Home() {
             <Computer
               className="js-laptop-scene"
               screenContent={
-                <div className="flex w-full flex-col items-start justify-center p-4 text-white bg-zinc-900/50 backdrop-blur-md">
+                <div className="flex w-full flex-col items-start justify-center p-4 text-white bg-zinc-900/50">
                   <span className="text-cyan-400 font-mono text-xs mb-1">01. Introduction</span>
                   <h2 className="text-xl font-bold mb-1">Hi, I'm wail!</h2>
                   <p className="text-xs leading-relaxed opacity-80 mb-4">
