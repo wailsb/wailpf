@@ -1,0 +1,130 @@
+.scene {
+    --unit: 1rem;
+    --rack-w: calc(var(--unit) * 9);
+    --rack-h: calc(var(--unit) * 1.8);
+    --rack-d: calc(var(--unit) * 9);
+    --rack-gap: calc(var(--unit) * 0.4);
+    --scene-rotate-x: -18deg;
+    --scene-rotate-y: -28deg;
+    --scene-rotate-z: 0deg;
+    
+    /* Colors */
+    --front: #151823;
+    --back: #0d1018;
+    --left: #1b2030;
+    --right: #202638;
+    --top: #262d42;
+    --bottom: #0a0d14;
+    --rim: rgb(255 255 255 / 0.06);
+    --led: #00e0c6;
+
+    perspective: 1400px;
+    perspective-origin: 50% 38%;
+    display: grid;
+    place-items: center;
+    min-height: 420px;
+    padding: 2rem;
+    overflow: visible;
+}
+
+.datacenter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rack-gap);
+    transform-style: preserve-3d;
+    transform:
+        rotateX(var(--scene-rotate-x))
+        rotateY(var(--scene-rotate-y))
+        rotateZ(var(--scene-rotate-z));
+    will-change: transform;
+}
+
+.view,
+.fullrack {
+    position: relative;
+    width: var(--rack-w);
+    height: var(--rack-h);
+    transform-style: preserve-3d;
+}
+
+/* Base side/lid positioning */
+.rackTop,
+.rackBottom,
+.ring,
+.panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+}
+
+/* Cylinder Wrapper */
+.ring {
+    transform-style: preserve-3d;
+    --panel-count: 128;
+    /* Math: (Width * PI / Panels) + 1.5px overlap to hide gaps */
+    --panel-w: calc(((var(--rack-w) * 3.14159) / var(--panel-count)) + 1.5px);
+}
+
+/* Individual Vertical Panels */
+.panel {
+    width: var(--panel-w);
+    height: var(--rack-h);
+    background: var(--front);
+    backface-visibility: hidden;
+    
+    /* Apply the wrapping transformation */
+    transform: 
+        translate(-50%, -50%) 
+        rotateY(calc(var(--i) * (360deg / var(--panel-count)))) 
+        translateZ(calc(var(--rack-w) / 2));
+}
+
+/* LED Lighting & Shading Overlay on Panels */
+.panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* This recreates your original LED strip pattern, wrapped */
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent calc(var(--unit) * 0.95),
+            rgb(0 224 198 / 0.15) calc(var(--unit) * 0.95),
+            rgb(0 224 198 / 0.15) calc(var(--unit) * 1.05),
+            transparent calc(var(--unit) * 1.05),
+            transparent calc(var(--unit) * 1.9)
+        ),
+        linear-gradient(90deg, rgba(0,0,0,0.2), transparent 20%, transparent 80%, rgba(0,0,0,0.2));
+    pointer-events: none;
+}
+
+/* Top and Bottom Circular Lids */
+.rackTop,
+.rackBottom {
+    border-radius: 50%;
+    width: var(--rack-w);
+    height: var(--rack-d);
+    backface-visibility: hidden;
+}
+
+.rackTop {
+    background: linear-gradient(180deg, #2c344d 0%, var(--top) 100%);
+    /* translateZ is (height / 2). Subtracting 0.5px closes the seam gap */
+    transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc((var(--rack-h) / 2) - 0.5px));
+    border: 1px solid var(--rim);
+}
+
+.rackBottom {
+    background: var(--bottom);
+    /* translateZ is (height / 2). Subtracting 0.5px closes the seam gap */
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc((var(--rack-h) / 2) - 0.5px));
+}
+
+@media (max-width: 640px) {
+    .scene {
+        --unit: 0.82rem;
+        min-height: 340px;
+    }
+}

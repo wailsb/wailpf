@@ -1,0 +1,262 @@
+.scene {
+  --uni-rx: 58deg;
+  --uni-ry: -8deg;
+  --uni-rz: 36deg;
+
+  --main-y: 18px;
+  --tower-lift: 2px; /* Adjusted to close gap with main block */
+  --dome-lift: 2px;  /* Adjusted to close gap with tower */
+  --dome-diameter: 56px;
+  --dome-height: 24px;
+  --dome-panels: 128; /* Increased for maximum smoothness */
+  --stairs-drop: 18px;
+
+  --main-w: 260px;
+  --main-h: 150px;
+  --main-d: 64px;
+
+  --tower-w: 84px;
+  --tower-h: 148px;
+  --tower-d: 56px;
+
+  --stone-1: #d8d4cb;
+  --stone-2: #c6c1b5;
+  --stone-3: #a9a295;
+  --window: #88d6ff;
+  --window-dark: #3f6d87;
+  --door-1: #7f5b3e;
+  --door-2: #5f422c;
+
+  width: 460px;
+  height: 360px;
+  display: grid;
+  place-items: center;
+  perspective: 1300px;
+  perspective-origin: 50% 38%;
+}
+
+.campus {
+  position: relative;
+  width: 320px;
+  height: 260px;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--uni-rx)) rotateY(var(--uni-ry)) rotateZ(var(--uni-rz));
+  will-change: transform;
+}
+
+.mainBlock,
+.tower,
+.dome {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+}
+
+/* --- MAIN BUILDING BLOCK --- */
+.mainBlock {
+  width: var(--main-w);
+  height: var(--main-h);
+  transform: translate3d(-50%, calc(-50% + var(--main-y)), 0);
+}
+
+.face,
+.edgeX,
+.edgeY {
+  position: absolute;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.face { inset: 0; }
+.edgeX { width: 100%; }
+.edgeY { height: 100%; }
+
+.mainFront {
+  background: linear-gradient(165deg, var(--stone-1) 0%, var(--stone-2) 62%, var(--stone-3) 100%);
+  transform: translateZ(calc(var(--main-d) / 2));
+  box-shadow: 0 18px 30px rgb(0 0 0 / 0.24), inset 0 0 0 1px rgb(255 255 255 / 0.2);
+}
+
+.mainBack {
+  background: #a8a294;
+  transform: rotateY(180deg) translateZ(calc(var(--main-d) / 2));
+}
+
+.mainTop, .mainBottom { height: var(--main-d); background: #bcb6a8; left: 0; }
+.mainTop { top: calc(var(--main-d) / -2); transform: rotateX(90deg); }
+.mainBottom { top: calc(100% - var(--main-d) / 2); transform: rotateX(-90deg); }
+
+.mainLeft, .mainRight { width: var(--main-d); background: #b4aea0; top: 0; }
+.mainLeft { left: calc(var(--main-d) / -2); transform: rotateY(-90deg); }
+.mainRight { right: calc(var(--main-d) / -2); transform: rotateY(90deg); }
+
+/* --- TOWER BLOCK --- */
+.tower {
+  width: var(--tower-w);
+  height: var(--tower-h);
+  /* Positioned to sit flush on top of the main block */
+  transform: translate3d(
+    -50%,
+    calc(-50% + var(--main-y) - (var(--main-h) / 2) - (var(--tower-h) / 2) + var(--tower-lift)),
+    0px
+  );
+}
+
+.towerFront {
+  background: linear-gradient(165deg, #d9d5cb 0%, #c7c2b6 100%);
+  transform: translateZ(calc(var(--tower-d) / 2));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+}
+
+.towerBack { background: #b4ad9f; transform: rotateY(180deg) translateZ(calc(var(--tower-d) / 2)); }
+.towerTop, .towerBottom { height: var(--tower-d); background: #c8c2b6; left: 0; }
+.towerTop { top: calc(var(--tower-d) / -2); transform: rotateX(90deg); }
+.towerBottom { top: calc(100% - var(--tower-d) / 2); transform: rotateX(-90deg); }
+.towerLeft, .towerRight { width: var(--tower-d); background: #b8b2a5; top: 0; }
+.towerLeft { left: calc(var(--tower-d) / -2); transform: rotateY(-90deg); }
+.towerRight { right: calc(var(--tower-d) / -2); transform: rotateY(90deg); }
+
+/* --- CIRCULAR DOME --- */
+.dome {
+  width: var(--dome-diameter);
+  height: var(--dome-height);
+  /* Aligned to sit flush on top of the tower */
+  transform: translate3d(
+    -50%,
+    calc(-50% + var(--main-y) - (var(--main-h) / 2) - var(--tower-h) + var(--tower-lift) + 10px - var(--dome-lift)),
+    0px
+  );
+}
+
+.domeRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* (Diameter * PI / Count) + overlap bleed */
+  --dome-panel-w: calc((var(--dome-diameter) * 3.14159 / var(--dome-panels)) + 1.2px);
+}
+
+.domePanel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--dome-panel-w);
+  height: 100%;
+  background: linear-gradient(180deg, #8f332d 0%, #5e201b 100%);
+  backface-visibility: hidden;
+  /* Wrap panels into a circle */
+  transform: translate(-50%, 0)
+    rotateY(calc(var(--i) * (360deg / var(--dome-panels))))
+    translateZ(calc(var(--dome-diameter) / 2));
+}
+
+.domeTop, .domeBottom {
+  position: absolute;
+  width: var(--dome-diameter);
+  height: var(--dome-diameter);
+  border-radius: 50%;
+  left: 0;
+  top: 50%;
+}
+
+.domeTop {
+  background: radial-gradient(circle at 35% 32%, #a4433d 0%, #7c2a24 56%, #561b17 100%);
+  /* translateZ is half height - overlap to close seams */
+  transform: translateY(-50%) rotateX(90deg) translateZ(calc(var(--dome-height) / 2 - 0.5px));
+}
+
+.domeBottom {
+  background: #3f1411;
+  transform: translateY(-50%) rotateX(-90deg) translateZ(calc(var(--dome-height) / 2 - 0.5px));
+}
+
+/* --- DETAILS (Windows, Doors, Clock, Stairs) --- */
+.windowGrid {
+  position: absolute;
+  left: 50%;
+  top: 16%;
+  width: 74%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.window {
+  height: 24px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--window) 0%, var(--window-dark) 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.32);
+}
+
+.door {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 44px;
+  height: 56px;
+  border-radius: 10px 10px 0 0;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--door-1) 0%, var(--door-2) 100%);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.22);
+}
+
+.clock {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 38% 34%, #fffdf7 0%, #e3dece 75%);
+  box-shadow: inset 0 0 0 2px #6f6a5f;
+}
+
+.clock::before, .clock::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #4e4a43;
+  transform-origin: bottom center;
+}
+
+.clock::before { width: 2px; height: 10px; transform: translate(-50%, -100%) rotate(30deg); }
+.clock::after { width: 2px; height: 7px; transform: translate(-50%, -100%) rotate(120deg); }
+
+.stairs {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 84px;
+  height: 28px;
+  transform: translate3d(
+      -50%,
+      calc(-50% + var(--main-y) + (var(--main-h) / 2) + var(--stairs-drop)),
+      calc(var(--main-d) / 2 + 1px)
+    );
+  border-radius: 6px;
+  background: repeating-linear-gradient(180deg, #c5beaf 0, #c5beaf 6px, #a9a293 6px, #a9a293 8px);
+}
+
+@media (max-width: 640px) {
+  .scene {
+    --main-w: 200px;
+    --main-h: 116px;
+    --main-d: 48px;
+    --tower-w: 66px;
+    --tower-h: 112px;
+    --tower-d: 42px;
+    --main-y: 14px;
+    --tower-lift: 1.5px;
+    --dome-lift: 1.5px;
+    --dome-diameter: 44px;
+    --dome-height: 18px;
+    --stairs-drop: 14px;
+    width: 340px;
+    height: 300px;
+  }
+}
