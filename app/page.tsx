@@ -1,10 +1,14 @@
 "use client";
 import Book from "@/components/3D/Book/Book";
+import Bug from "@/components/3D/Bug/Bug";
 import Computer from "@/components/3D/Computer/Computer";
 import { animate } from "animejs";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
+  const bugCursorRef = useRef<HTMLDivElement>(null);
+  const bugSpinRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // 1. Laptop Animation
     const laptop = document.querySelector(".js-laptop-scene");
@@ -76,6 +80,43 @@ export default function Home() {
       observer.observe(bookSection);
       return () => observer.disconnect();
     }
+  }, []);
+
+  useEffect(() => {
+    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const cursor = bugCursorRef.current;
+    const spinner = bugSpinRef.current;
+    if (!hasFinePointer || !cursor || !spinner) {
+      return;
+    }
+
+    document.body.classList.add("cursor-none");
+
+    const moveCursor = (x: number, y: number) => {
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate3d(-50%, -50%, 0)`;
+    };
+
+    const onMouseMove = (event: MouseEvent) => {
+      moveCursor(event.clientX, event.clientY);
+    };
+
+    const onMouseDown = () => {
+      animate(spinner, {
+        rotate: "+=360",
+        duration: 650,
+        easing: "easeOutCubic",
+      });
+    };
+
+    moveCursor(window.innerWidth / 2, window.innerHeight / 2);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mousedown", onMouseDown);
+
+    return () => {
+      document.body.classList.remove("cursor-none");
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousedown", onMouseDown);
+    };
   }, []);
 
   const handleExplore = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -264,6 +305,16 @@ export default function Home() {
           SEC_LEVEL: 0 // NODE_ACTIVE
         </div>
       </main>
+
+      <div
+        ref={bugCursorRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] hidden md:block will-change-transform"
+      >
+        <div ref={bugSpinRef} className="origin-center scale-[0.12]">
+          <Bug />
+        </div>
+      </div>
     </div>
   );
 }
